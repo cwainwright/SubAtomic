@@ -1,40 +1,10 @@
-from math import floor, ceil
 from copy import deepcopy
-
-def get_max_sizes(data: list):
-    max_sizes = [0] * len(data[0])
-    for line in data:
-        for index, item in enumerate(line):
-            max_sizes[index] = (
-                len(item) if max_sizes[index] < len(item) else max_sizes[index]
-            )
-    return max_sizes
-
-def align(item, max_size, align = "left"):
-    return_string = ""
-    padding = (max_size - len(item))
-    if align == "left":
-        return_string += (item + padding * " ")
-    elif align == "centre":
-        if padding // 2 != 0:
-            padding = [floor(padding//2), floor(padding//2)+1]
-            return_string += (padding[0] * " " + item + padding[1] * " ")
-        else:
-            return_string += (padding/2 * " " + item + padding/2 * " ")
-    elif align == "right":
-        return_string += (padding * " " + item)
-    else:
-        return_string += (item + padding * " ")
-    return return_string
-
-
-
 
 class Table:
     def __init__(self, data: list, headers: bool = True, alignment = "left", padding: int = 3):
         table_data = deepcopy(data)
         self.return_string = "\n"
-        max_sizes = get_max_sizes(table_data)
+        max_sizes = self.get_max_sizes(table_data)
         max_sizes = [max_size + padding for max_size in max_sizes]
         if headers:
             self.return_string += self.make_header(table_data[0], max_sizes, alignment)
@@ -46,6 +16,32 @@ class Table:
         self.return_string += self.line(max_sizes, "bot")
         
     # Functions to construct table features
+    def get_max_sizes(self, data: list):
+        max_sizes = [0] * len(data[0])
+        for line in data:
+            for index, item in enumerate(line):
+                max_sizes[index] = (
+                    len(item) if max_sizes[index] < len(item) else max_sizes[index]
+                )
+        return max_sizes
+
+    def align(self, item, max_size, align = "left"):
+        return_string = ""
+        padding = (max_size - len(item))
+        if align == "left":
+            return_string += (item + padding * " ")
+        elif align == "centre":
+            if padding // 2 != 0:
+                padding = [round(padding//2)-1, round(padding//2)]
+                return_string += (padding[0] * " " + item + padding[1] * " ")
+            else:
+                return_string += (padding/2 * " " + item + padding/2 * " ")
+        elif align == "right":
+            return_string += (padding * " " + item)
+        else:
+            return_string += (item + padding * " ")
+        return return_string
+    
     def line(self, max_sizes, line = "mid"):
         corners = {
             "top": ["\u250C", "\u252C", "\u2510"],
@@ -69,7 +65,7 @@ class Table:
     def make_row(self, data: list, max_sizes: list, alignment: str = "left") -> str:
         return_string = "\n"
         for index, item in enumerate(data):
-            return_string += "\u2502" + align(item, max_sizes[index], alignment)
+            return_string += "\u2502" + self.align(item, max_sizes[index], alignment)
         return_string += "\u2502"
         return return_string
     
