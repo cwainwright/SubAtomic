@@ -1,0 +1,50 @@
+[
+    {
+        "name": "up",
+        "symbol": "u",
+        "charge": "2/3",
+        "baryon": "1/3",
+        "lepton": "0",
+        "strangeness": "0"
+    },
+    {
+        "name": "down",
+        "symbol": "d",
+        "charge": "-1/3",
+        "baryon": "1/3",
+        "lepton": "0",
+        "strangeness": "0"
+    },
+    {
+        "name": "charm",
+        "symbol": "c",
+        "charge": "2/3",
+        "baryon": "1/3",
+        "lepton": "0",
+        "strangeness": "0"
+    },
+    {
+        "name": "strange",
+        "symbol": "s",
+        "charge": "-1/3",
+        "baryon": "1/3",
+        "lepton": "0",
+        "strangeness": "-1"
+    },
+    {
+        "name": "top",
+        "symbol": "t",
+        "charge": "2/3",
+        "baryon": "1/3",
+        "lepton": "0",
+        "strangeness": "0"
+    },
+    {
+        "name": "bottom",
+        "symbol": "b",
+        "charge": "-1/3",
+        "baryon": "1/3",
+        "lepton": "0",
+        "strangeness": "0"
+    }
+]
